@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import com.retailer_backend.retailer_backend.model.Customers;
@@ -11,6 +13,7 @@ import com.retailer_backend.retailer_backend.model.Transactions;
 
 @Service
 public class CalculateRewardsService {
+     private static final Logger logger = LoggerFactory.getLogger(CalculateRewardsService.class);
 
      public Map<String, Map<String, Integer>> calculateRewards(List<Customers> customers) {
         Map<String, Map<String, Integer>> rewards = new HashMap<>();
@@ -26,10 +29,11 @@ public class CalculateRewardsService {
 
             }
             monthlyPoints.merge("Total Rewards", totalPoints, Integer::sum);
-            System.out.println(monthlyPoints);
-            rewards.put(customer.getCustomerName(), monthlyPoints );
+            
+            rewards.put(customer.getCustomerName(), monthlyPoints);
+            logger.debug("Total points for customer {}: {}", customer.getCustomerName(), totalPoints);
         }
-
+        logger.info("Reward points calculation completed");
         return rewards;
     }
 

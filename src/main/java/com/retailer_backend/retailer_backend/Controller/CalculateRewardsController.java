@@ -5,10 +5,12 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
+
 
 import com.retailer_backend.retailer_backend.model.Customers;
 import com.retailer_backend.retailer_backend.model.Transactions;
@@ -16,11 +18,15 @@ import com.retailer_backend.retailer_backend.service.CalculateRewardsService;
 
 @RestController
 public class CalculateRewardsController {
+    private static final Logger logger = LoggerFactory.getLogger(CalculateRewardsController.class);
+   
     @Autowired
     private CalculateRewardsService calculateRewardsService;
 
+   
     @GetMapping("/rewards")
     public Map<String, Map<String, Integer>> getRewards() {
+        logger.info("Fetching rewards data");
         List<Customers> customers = getJSONData();
         return calculateRewardsService.calculateRewards(customers);
     }
