@@ -41,15 +41,18 @@ public class CalculateRewardsService {
         int points = 0;
 
         if (amount > 100) {
-            points += (((amount - 100) * 2) + (1 * 50));
-          
+            points += (((amount - 100) * 2));
+            amount = 100;
+
         }
 
-        if (amount > 50 && amount < 100  ) {
+        if (amount > 50 ) {
             points += (amount - 50);
         }
 
         return points;
     }
+    
+ 
 
 }
