@@ -28,7 +28,7 @@ public class CalculateRewardsService {
                 monthlyPoints.merge(transaction.getDate().getMonth().toString(), points, Integer::sum);
 
             }
-            monthlyPoints.merge("Total Rewards", totalPoints, Integer::sum);
+           // monthlyPoints.merge("Total Rewards", totalPoints, Integer::sum);
             
             rewards.put(customer.getCustomerName(), monthlyPoints);
             logger.debug("Total points for customer {}: {}", customer.getCustomerName(), totalPoints);
